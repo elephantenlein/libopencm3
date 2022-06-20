@@ -33,7 +33,7 @@ mode.
 Example: Timer 2 with 2x clock divide, edge aligned and up counting.
 @code
 	rcc_periph_clock_enable(RCC_TIM2);
-	timer_set_mode(TIM2, TIM_CTL0_CKD_CK_INT_MUL_2,
+	timer_set_mode(TIM2, TIM_CTL0_CKDIV_INT_MUL_2,
 		       TIM_CTL0_CAM_EDGE, TIM_CTL0_DIR_UP);
 	...
 	timer_set_period(TIM2, 1000);
@@ -59,7 +59,7 @@ alternate function push-pull output where the PWM output will appear.
 	// End of family specific
 
 	rcc_periph_clock_enable(RCC_TIM1);
-	timer_set_mode(TIM1, TIM_CTL0_CKD_CK_INT, TIM_CTL0_CAM_CENTER_1,
+	timer_set_mode(TIM1, TIM_CTL0_CKDIV_INT, TIM_CTL0_CAM_CENTER_1,
 		       TIM_CTL0_DIR_UP);
 	timer_set_oc_mode(TIM1, TIM_OC0, TIM_OCM_PWM2);
 	timer_enable_oc_output(TIM1, TIM_OC0);
@@ -110,7 +110,7 @@ knob.
  * Basic TIMER handling API.
  *
  * Examples:
- *  timer_set_mode(TIM1, TIM_CTL0_CKD_CK_INT_MUL_2,
+ *  timer_set_mode(TIM1, TIM_CTL0_CKDIV_INT_MUL_2,
  *                 TIM_CTL0_CAM_CENTRE_3, TIM_CTL0_DIR_UP);
  */
 
@@ -241,7 +241,7 @@ void timer_set_mode(uint32_t timer_peripheral, uint32_t clock_div,
 
 	cr1 = TIM_CTL0(timer_peripheral);
 
-	cr1 &= ~(TIM_CTL0_CKD_CK_INT_MASK | TIM_CTL0_CAM_MASK | TIM_CTL0_DIR_DOWN);
+	cr1 &= ~(TIM_CTL0_CKDIV_INT_MASK | TIM_CTL0_CAM_MASK | TIM_CTL0_DIR_DOWN);
 
 	cr1 |= clock_div | alignment | direction;
 
@@ -262,8 +262,8 @@ tim_x_cr1_cdr
 
 void timer_set_clock_division(uint32_t timer_peripheral, uint32_t clock_div)
 {
-	clock_div &= TIM_CTL0_CKD_CK_INT_MASK;
-	TIM_CTL0(timer_peripheral) &= ~TIM_CTL0_CKD_CK_INT_MASK;
+	clock_div &= TIM_CTL0_CKDIV_INT_MASK;
+	TIM_CTL0(timer_peripheral) &= ~TIM_CTL0_CKDIV_INT_MASK;
 	TIM_CTL0(timer_peripheral) |= clock_div;
 }
 

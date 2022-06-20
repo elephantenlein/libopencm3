@@ -49,6 +49,7 @@ specific memorymap.h header before including this header file.*/
 
 /* Control register 1 (TIMx_CTL0) */
 #define TIM_CTL0(tim_base)               MMIO32((tim_base) + 0x00)
+#define TIM0_CTL0			TIM_CTL0(TIM0)
 #define TIM1_CTL0			TIM_CTL0(TIM1)
 #define TIM2_CTL0			TIM_CTL0(TIM2)
 #define TIM3_CTL0			TIM_CTL0(TIM3)
@@ -65,10 +66,10 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_CTL0			TIM_CTL0(TIM14)
 #define TIM15_CTL0			TIM_CTL0(TIM15)
 #define TIM16_CTL0			TIM_CTL0(TIM16)
-#define TIM17_CTL0			TIM_CTL0(TIM17)
 
 /* Control register 2 (TIMx_CTL1) */
 #define TIM_CTL1(tim_base)		MMIO32((tim_base) + 0x04)
+#define TIM0_CTL1			TIM_CTL1(TIM0)
 #define TIM1_CTL1			TIM_CTL1(TIM1)
 #define TIM2_CTL1			TIM_CTL1(TIM2)
 #define TIM3_CTL1			TIM_CTL1(TIM3)
@@ -77,24 +78,30 @@ specific memorymap.h header before including this header file.*/
 #define TIM6_CTL1			TIM_CTL1(TIM6)
 #define TIM7_CTL1			TIM_CTL1(TIM7)
 #define TIM8_CTL1			TIM_CTL1(TIM8)
+#define TIM9_CTL1			TIM_CTL1(TIM9)
+#define TIM10_CTL1			TIM_CTL1(TIM10)
+#define TIM11_CTL1			TIM_CTL1(TIM11)
+#define TIM12_CTL1			TIM_CTL1(TIM12)
+#define TIM13_CTL1			TIM_CTL1(TIM13)
+#define TIM14_CTL1			TIM_CTL1(TIM14)
 #define TIM15_CTL1			TIM_CTL1(TIM15)
 #define TIM16_CTL1			TIM_CTL1(TIM16)
-#define TIM17_CTL1			TIM_CTL1(TIM17)
 
 /* Slave mode control register (TIMx_SMCFG) */
 #define TIM_SMCFG(tim_base)		MMIO32((tim_base) + 0x08)
+#define TIM0_SMCFG			TIM_SMCFG(TIM0)
 #define TIM1_SMCFG			TIM_SMCFG(TIM1)
 #define TIM2_SMCFG			TIM_SMCFG(TIM2)
 #define TIM3_SMCFG			TIM_SMCFG(TIM3)
 #define TIM4_SMCFG			TIM_SMCFG(TIM4)
-#define TIM5_SMCFG			TIM_SMCFG(TIM5)
+#define TIM7_SMCFG			TIM_SMCFG(TIM7)
 #define TIM8_SMCFG			TIM_SMCFG(TIM8)
-#define TIM9_SMCFG			TIM_SMCFG(TIM9)
-#define TIM12_SMCFG			TIM_SMCFG(TIM12)
-#define TIM15_SMCFG			TIM_SMCFG(TIM15)
+#define TIM11_SMCFG			TIM_SMCFG(TIM11)
+#define TIM14_SMCFG			TIM_SMCFG(TIM14)
 
 /* DMA/Interrupt enable register (TIMx_DMAINTEN) */
 #define TIM_DMAINTEN(tim_base)		MMIO32((tim_base) + 0x0C)
+#define TIM0_DMAINTEN			TIM_DMAINTEN(TIM0)
 #define TIM1_DMAINTEN			TIM_DMAINTEN(TIM1)
 #define TIM2_DMAINTEN			TIM_DMAINTEN(TIM2)
 #define TIM3_DMAINTEN			TIM_DMAINTEN(TIM3)
@@ -111,10 +118,10 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_DMAINTEN			TIM_DMAINTEN(TIM14)
 #define TIM15_DMAINTEN			TIM_DMAINTEN(TIM15)
 #define TIM16_DMAINTEN			TIM_DMAINTEN(TIM16)
-#define TIM17_DMAINTEN			TIM_DMAINTEN(TIM17)
 
 /* Status register (TIMx_INTF) */
 #define TIM_INTF(tim_base)		MMIO32((tim_base) + 0x10)
+#define TIM0_INTF			TIM_INTF(TIM0)
 #define TIM1_INTF			TIM_INTF(TIM1)
 #define TIM2_INTF			TIM_INTF(TIM2)
 #define TIM3_INTF			TIM_INTF(TIM3)
@@ -131,10 +138,10 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_INTF			TIM_INTF(TIM14)
 #define TIM15_INTF			TIM_INTF(TIM15)
 #define TIM16_INTF			TIM_INTF(TIM16)
-#define TIM17_INTF			TIM_INTF(TIM17)
 
 /* Event generation register (TIMx_SWEVG) */
 #define TIM_SWEVG(tim_base)		MMIO32((tim_base) + 0x14)
+#define TIM0_SWEVG			TIM_SWEVG(TIM0)
 #define TIM1_SWEVG			TIM_SWEVG(TIM1)
 #define TIM2_SWEVG			TIM_SWEVG(TIM2)
 #define TIM3_SWEVG			TIM_SWEVG(TIM3)
@@ -151,15 +158,15 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_SWEVG			TIM_SWEVG(TIM14)
 #define TIM15_SWEVG			TIM_SWEVG(TIM15)
 #define TIM16_SWEVG			TIM_SWEVG(TIM16)
-#define TIM17_SWEVG			TIM_SWEVG(TIM17)
 
 /* Capture/compare mode register 1 (TIMx_CHCTL0) */
 #define TIM_CHCTL0(tim_base)		MMIO32((tim_base) + 0x18)
+#define TIM0_CHCTL0			TIM_CHCTL0(TIM0)
 #define TIM1_CHCTL0			TIM_CHCTL0(TIM1)
 #define TIM2_CHCTL0			TIM_CHCTL0(TIM2)
 #define TIM3_CHCTL0			TIM_CHCTL0(TIM3)
 #define TIM4_CHCTL0			TIM_CHCTL0(TIM4)
-#define TIM5_CHCTL0			TIM_CHCTL0(TIM5)
+#define TIM7_CHCTL0			TIM_CHCTL0(TIM7)
 #define TIM8_CHCTL0			TIM_CHCTL0(TIM8)
 #define TIM9_CHCTL0			TIM_CHCTL0(TIM9)
 #define TIM10_CHCTL0			TIM_CHCTL0(TIM10)
@@ -169,24 +176,24 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_CHCTL0			TIM_CHCTL0(TIM14)
 #define TIM15_CHCTL0			TIM_CHCTL0(TIM15)
 #define TIM16_CHCTL0			TIM_CHCTL0(TIM16)
-#define TIM17_CHCTL0			TIM_CHCTL0(TIM17)
 
 /* Capture/compare mode register 2 (TIMx_CHCTL1) */
 #define TIM_CHCTL1(tim_base)		MMIO32((tim_base) + 0x1C)
+#define TIM0_CHCTL1			TIM_CHCTL1(TIM0)
 #define TIM1_CHCTL1			TIM_CHCTL1(TIM1)
 #define TIM2_CHCTL1			TIM_CHCTL1(TIM2)
 #define TIM3_CHCTL1			TIM_CHCTL1(TIM3)
 #define TIM4_CHCTL1			TIM_CHCTL1(TIM4)
-#define TIM5_CHCTL1			TIM_CHCTL1(TIM5)
-#define TIM8_CHCTL1			TIM_CHCTL1(TIM8)
+#define TIM7_CHCTL1			TIM_CHCTL1(TIM7)
 
 /* Capture/compare enable register (TIMx_CCER) */
 #define TIM_CCER(tim_base)		MMIO32((tim_base) + 0x20)
+#define TIM0_CCER			TIM_CCER(TIM0)
 #define TIM1_CCER			TIM_CCER(TIM1)
 #define TIM2_CCER			TIM_CCER(TIM2)
 #define TIM3_CCER			TIM_CCER(TIM3)
 #define TIM4_CCER			TIM_CCER(TIM4)
-#define TIM5_CCER			TIM_CCER(TIM5)
+#define TIM7_CCER			TIM_CCER(TIM7)
 #define TIM8_CCER			TIM_CCER(TIM8)
 #define TIM9_CCER			TIM_CCER(TIM9)
 #define TIM10_CCER			TIM_CCER(TIM10)
@@ -196,10 +203,10 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_CCER			TIM_CCER(TIM14)
 #define TIM15_CCER			TIM_CCER(TIM15)
 #define TIM16_CCER			TIM_CCER(TIM16)
-#define TIM17_CCER			TIM_CCER(TIM17)
 
 /* Counter (TIMx_CNT) */
 #define TIM_CNT(tim_base)		MMIO32((tim_base) + 0x24)
+#define TIM0_CNT			TIM_CNT(TIM0)
 #define TIM1_CNT			TIM_CNT(TIM1)
 #define TIM2_CNT			TIM_CNT(TIM2)
 #define TIM3_CNT			TIM_CNT(TIM3)
@@ -216,10 +223,10 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_CNT			TIM_CNT(TIM14)
 #define TIM15_CNT			TIM_CNT(TIM15)
 #define TIM16_CNT			TIM_CNT(TIM16)
-#define TIM17_CNT			TIM_CNT(TIM17)
 
 /* Prescaler (TIMx_PSC) */
 #define TIM_PSC(tim_base)		MMIO32((tim_base) + 0x28)
+#define TIM0_PSC			TIM_PSC(TIM0)
 #define TIM1_PSC			TIM_PSC(TIM1)
 #define TIM2_PSC			TIM_PSC(TIM2)
 #define TIM3_PSC			TIM_PSC(TIM3)
@@ -236,10 +243,10 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_PSC			TIM_PSC(TIM14)
 #define TIM15_PSC			TIM_PSC(TIM15)
 #define TIM16_PSC			TIM_PSC(TIM16)
-#define TIM17_PSC			TIM_PSC(TIM17)
 
 /* Auto-reload register (TIMx_CAR) */
 #define TIM_CAR(tim_base)		MMIO32((tim_base) + 0x2C)
+#define TIM0_CAR			TIM_CAR(TIM0)
 #define TIM1_CAR			TIM_CAR(TIM1)
 #define TIM2_CAR			TIM_CAR(TIM2)
 #define TIM3_CAR			TIM_CAR(TIM3)
@@ -256,23 +263,23 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_CAR			TIM_CAR(TIM14)
 #define TIM15_CAR			TIM_CAR(TIM15)
 #define TIM16_CAR			TIM_CAR(TIM16)
-#define TIM17_CAR			TIM_CAR(TIM17)
 
 /* Repetition counter register (TIMx_CREP) */
 #define TIM_CREP(tim_base)		MMIO32((tim_base) + 0x30)
-#define TIM1_CREP			TIM_CREP(TIM1)
-#define TIM8_CREP			TIM_CREP(TIM8)
+#define TIM0_CREP			TIM_CREP(TIM0)
+#define TIM7_CREP			TIM_CREP(TIM7)
+#define TIM14_CREP			TIM_CREP(TIM14)
 #define TIM15_CREP			TIM_CREP(TIM15)
 #define TIM16_CREP			TIM_CREP(TIM16)
-#define TIM17_CREP			TIM_CREP(TIM17)
 
 /* Capture/compare register 1 (TIMx_CH0CV) */
 #define TIM_CH0CV(tim_base)		MMIO32((tim_base) + 0x34)
+#define TIM0_CH0CV			TIM_CH0CV(TIM0)
 #define TIM1_CH0CV			TIM_CH0CV(TIM1)
 #define TIM2_CH0CV			TIM_CH0CV(TIM2)
 #define TIM3_CH0CV			TIM_CH0CV(TIM3)
 #define TIM4_CH0CV			TIM_CH0CV(TIM4)
-#define TIM5_CH0CV			TIM_CH0CV(TIM5)
+#define TIM7_CH0CV			TIM_CH0CV(TIM7)
 #define TIM8_CH0CV			TIM_CH0CV(TIM8)
 #define TIM9_CH0CV			TIM_CH0CV(TIM9)
 #define TIM10_CH0CV			TIM_CH0CV(TIM10)
@@ -282,69 +289,68 @@ specific memorymap.h header before including this header file.*/
 #define TIM14_CH0CV			TIM_CH0CV(TIM14)
 #define TIM15_CH0CV			TIM_CH0CV(TIM15)
 #define TIM16_CH0CV			TIM_CH0CV(TIM16)
-#define TIM17_CH0CV			TIM_CH0CV(TIM17)
 
 /* Capture/compare register 2 (TIMx_CH1CV) */
 #define TIM_CH1CV(tim_base)		MMIO32((tim_base) + 0x38)
+#define TIM0_CH1CV			TIM_CH1CV(TIM0)
 #define TIM1_CH1CV			TIM_CH1CV(TIM1)
 #define TIM2_CH1CV			TIM_CH1CV(TIM2)
 #define TIM3_CH1CV			TIM_CH1CV(TIM3)
 #define TIM4_CH1CV			TIM_CH1CV(TIM4)
-#define TIM5_CH1CV			TIM_CH1CV(TIM5)
+#define TIM7_CH1CV			TIM_CH1CV(TIM7)
 #define TIM8_CH1CV			TIM_CH1CV(TIM8)
-#define TIM9_CH1CV			TIM_CH1CV(TIM9)
-#define TIM12_CH1CV			TIM_CH1CV(TIM12)
-#define TIM15_CH1CV			TIM_CH1CV(TIM15)
+#define TIM11_CH1CV			TIM_CH1CV(TIM11)
+#define TIM14_CH1CV			TIM_CH1CV(TIM14)
 
 /* Capture/compare register 3 (TIMx_CH2CV) */
 #define TIM_CH2CV(tim_base)		MMIO32((tim_base) + 0x3C)
+#define TIM0_CH2CV			TIM_CH2CV(TIM0)
 #define TIM1_CH2CV			TIM_CH2CV(TIM1)
 #define TIM2_CH2CV			TIM_CH2CV(TIM2)
 #define TIM3_CH2CV			TIM_CH2CV(TIM3)
 #define TIM4_CH2CV			TIM_CH2CV(TIM4)
-#define TIM5_CH2CV			TIM_CH2CV(TIM5)
-#define TIM8_CH2CV			TIM_CH2CV(TIM8)
+#define TIM7_CH2CV			TIM_CH2CV(TIM7)
 
 /* Capture/compare register 4 (TIMx_CH3CV) */
 #define TIM_CH3CV(tim_base)		MMIO32((tim_base) + 0x40)
+#define TIM0_CH3CV			TIM_CH3CV(TIM0)
 #define TIM1_CH3CV			TIM_CH3CV(TIM1)
 #define TIM2_CH3CV			TIM_CH3CV(TIM2)
 #define TIM3_CH3CV			TIM_CH3CV(TIM3)
 #define TIM4_CH3CV			TIM_CH3CV(TIM4)
-#define TIM5_CH3CV			TIM_CH3CV(TIM5)
-#define TIM8_CH3CV			TIM_CH3CV(TIM8)
+#define TIM7_CH3CV			TIM_CH3CV(TIM7)
 
 /* Break and dead-time register (TIMx_CCHP) */
 #define TIM_CCHP(tim_base)		MMIO32((tim_base) + 0x44)
-#define TIM1_CCHP			TIM_CCHP(TIM1)
-#define TIM8_CCHP			TIM_CCHP(TIM8)
+#define TIM0_CCHP			TIM_CCHP(TIM0)
+#define TIM7_CCHP			TIM_CCHP(TIM7)
+#define TIM14_CCHP			TIM_CCHP(TIM14)
 #define TIM15_CCHP			TIM_CCHP(TIM15)
 #define TIM16_CCHP			TIM_CCHP(TIM16)
-#define TIM17_CCHP			TIM_CCHP(TIM17)
 
 /* DMA control register (TIMx_DMACFG) */
 #define TIM_DMACFG(tim_base)		MMIO32((tim_base) + 0x48)
+#define TIM0_DMACFG			TIM_DMACFG(TIM0)
 #define TIM1_DMACFG			TIM_DMACFG(TIM1)
 #define TIM2_DMACFG			TIM_DMACFG(TIM2)
 #define TIM3_DMACFG			TIM_DMACFG(TIM3)
 #define TIM4_DMACFG			TIM_DMACFG(TIM4)
-#define TIM5_DMACFG			TIM_DMACFG(TIM5)
-#define TIM8_DMACFG			TIM_DMACFG(TIM8)
+#define TIM7_DMACFG			TIM_DMACFG(TIM7)
+#define TIM14_DMACFG			TIM_DMACFG(TIM14)
 #define TIM15_DMACFG			TIM_DMACFG(TIM15)
 #define TIM16_DMACFG			TIM_DMACFG(TIM16)
-#define TIM17_DMACFG			TIM_DMACFG(TIM17)
 
 /* DMA address for full transfer (TIMx_DMATB) */
 #define TIM_DMATB(tim_base)		MMIO32((tim_base) + 0x4C)
+#define TIM0_DMATB			TIM_DMATB(TIM0)
 #define TIM1_DMATB			TIM_DMATB(TIM1)
 #define TIM2_DMATB			TIM_DMATB(TIM2)
 #define TIM3_DMATB			TIM_DMATB(TIM3)
 #define TIM4_DMATB			TIM_DMATB(TIM4)
-#define TIM5_DMATB			TIM_DMATB(TIM5)
-#define TIM8_DMATB			TIM_DMATB(TIM8)
+#define TIM7_DMATB			TIM_DMATB(TIM7)
+#define TIM14_DMATB			TIM_DMATB(TIM14)
 #define TIM15_DMATB			TIM_DMATB(TIM15)
 #define TIM16_DMATB			TIM_DMATB(TIM16)
-#define TIM17_DMATB			TIM_DMATB(TIM17)
 
 /* --- TIMx_CTL0 values ----------------------------------------------------- */
 
@@ -352,10 +358,10 @@ specific memorymap.h header before including this header file.*/
 /** @defgroup tim_x_cr1_cdr TIMx_CTL0 CKD[1:0] Clock Division Ratio
 @{*/
 /* CKD[1:0]: Clock division */
-#define TIM_CTL0_CKD_CK_INT		(0x0 << 8)
-#define TIM_CTL0_CKD_CK_INT_MUL_2	(0x1 << 8)
-#define TIM_CTL0_CKD_CK_INT_MUL_4	(0x2 << 8)
-#define TIM_CTL0_CKD_CK_INT_MASK	(0x3 << 8)
+#define TIM_CTL0_CKDIV_INT		(0x0 << 8)
+#define TIM_CTL0_CKDIV_INT_MUL_2	(0x1 << 8)
+#define TIM_CTL0_CKDIV_INT_MUL_4	(0x2 << 8)
+#define TIM_CTL0_CKDIV_INT_MASK	(0x3 << 8)
 /**@}*/
 
 /* ARPE: Auto-reload shadow enable */

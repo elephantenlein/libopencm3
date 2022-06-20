@@ -88,14 +88,14 @@ const struct rcc_clock_scale rcc_hse8_configs[] = {
 	{ /* 72MHz */
 		.pllmul = RCC_CFGR_PLLMUL_PLL_CLK_MUL9,
 		.hpre = RCC_CFGR_HPRE_NODIV,
-		.ppre1 = RCC_CFGR_PPRE_DIV2,
+		.ppre1 = RCC_CFGR_PPRE_NODIV,
 		.ppre2 = RCC_CFGR_PPRE_NODIV,
-		.adcpre = RCC_CFGR_ADCPRE_DIV8,
+		.adcpre = RCC_CFGR_ADCPRE_DIV6,
 		.usbpre = RCC_CFGR_USBPRE_PLL_CLK_DIV1_5,
 		.use_hse = true,
 		.pll_hse_prediv = RCC_CFGR2_PREDIV_NODIV,
 		.ahb_frequency	= 72000000,
-		.apb1_frequency = 36000000,
+		.apb1_frequency = 72000000,
 		.apb2_frequency = 72000000,
 	},
 };
