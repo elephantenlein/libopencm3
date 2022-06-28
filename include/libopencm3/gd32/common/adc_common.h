@@ -146,7 +146,7 @@ specific memorymap.h header before including this header file.*/
 /** VBATEN: Enable Vbat channel **/
 #define ADC_CTL1_VBATEN (1<<24)
 /** TSVREN: Channel 16 and 17 enable **/
-#define ADC_CTL1_RSVREN (1<<23)
+#define ADC_CTL1_TSVREN (1<<23)
 /** SWRCST: Start on regular channel **/
 #define ADC_CTL1_SWRCST (1<<22)
 /** SWICST: Start on inserted channel **/
@@ -169,7 +169,7 @@ specific memorymap.h header before including this header file.*/
 /** ETEIC: External trigger enable for inserted channel **/
 #define ADC_CTL1_ETEIC (1<<15)
 
-#define ADC_CTL1_ETSIC_SHIFT	17
+#define ADC_CTL1_ETSIC_SHIFT	12
 #define ADC_CTL1_ETSIC_MASK	(0x07 << ADC_CTL1_ETSIC_SHIFT)
 /** ETSIC: External trigger select for regular channel **/
 #define ADC_CTL1_ETSIC_TIM0_TRGO	(0 << ADC_CTL1_ETSIC_SHIFT)
@@ -265,7 +265,7 @@ specific memorymap.h header before including this header file.*/
 @{*/
 #define ADC_RSQ0_RL_SHIFT	20
 #define ADC_RSQ0_RL_MASK	(0x0F << ADC_RSQ0_RL_SHIFT)
-#define ADC_RSQ0_RL_VAL(x)	((x) << ADC_RSQ0_RL_SHIFT)
+#define ADC_RSQ0_RL_VAL(x)	((x - 1) << ADC_RSQ0_RL_SHIFT)
 
 #define ADC_RSQ0_RSQ15_SHIFT	15
 #define ADC_RSQ0_RSQ14_SHIFT	10
@@ -360,10 +360,15 @@ bool adc_is_power_off(uint32_t adc);
 void adc_calibrate_async(uint32_t adc);
 bool adc_is_calibrating(uint32_t adc);
 void adc_calibrate(uint32_t adc);
+void adc_reset_calibration(uint32_t adc);
 void adc_set_continuous_conversion_mode(uint32_t adc);
 void adc_set_single_conversion_mode(uint32_t adc);
-void adc_set_regular_sequence(uint32_t adc, uint8_t length, uint8_t channel[]);
+void adc_set_regular_sequence(uint32_t adc, uint8_t length, const uint8_t channel[]);
+void adc_set_inserted_sequence(uint32_t adc, uint8_t length, const uint8_t channel[]);
 void adc_set_sample_time_on_channel(uint32_t adc, uint8_t channel, uint8_t time);
+void adc_enable_automatic_inserted_group_conversion(uint32_t adc);
+void adc_disable_automatic_inserted_group_conversion(uint32_t adc);
+void adc_set_inserted_offset(uint32_t adc, uint8_t reg, uint32_t offset);
 void adc_enable_vref_temperature_sensor(uint32_t adc);
 void adc_disable_vref_temperature_sensor(uint32_t adc);
 void adc_set_left_aligned(uint32_t adc);
@@ -379,7 +384,10 @@ void adc_disable_overrun_interrupt(uint32_t adc);
 bool adc_get_overrun_flag(uint32_t adc);
 void adc_clear_overrun_flag(uint32_t adc);
 uint32_t adc_read_regular(uint32_t adc);
+uint32_t adc_read_inserted(uint32_t adc, uint8_t reg);
 void adc_start_conversion_regular(uint32_t adc);
+void adc_start_conversion_inserted(uint32_t adc);
+
 END_DECLS
 
 #endif

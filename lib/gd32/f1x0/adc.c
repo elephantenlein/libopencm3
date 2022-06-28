@@ -43,13 +43,28 @@
 
 /*---------------------------------------------------------------------------*/
 /** @brief ADC Enable Discontinuous Mode for Regular Conversions
- *
- * @param[in] adc Unsigned int32. ADC base address (@ref adc_reg_base)
- */
 
-void adc_enable_regular_discontinuous_mode(uint32_t adc)
+In this mode the ADC converts, on each trigger, a subgroup of up to 8 of the
+defined regular channel group. The subgroup is defined by the number of
+consecutive channels to be converted. After a subgroup has been converted
+the next trigger will start conversion of the immediately following subgroup
+of the same length or until the whole group has all been converted. When the
+the whole group has been converted, the next trigger will restart conversion
+of the subgroup at the beginning of the whole group.
+
+@param[in] adc Unsigned int32. ADC block register address base @ref adc_reg_base
+@param[in] length Unsigned int8. Number of channels in the group @ref
+adc_cr1_discnum
+*/
+
+void adc_enable_regular_discontinuous_mode(uint32_t adc, uint8_t length)
 {
+    if ((length-1) > 7) {
+	    return;
+    }
     ADC_CTL0(adc) |= ADC_CTL0_DISRC;
+    ADC_CTL0(adc) &= ~ADC_CTL0_DISNUM;
+    ADC_CTL0(adc) |= ADC_CTL0_DISNUM_VAL(length-1);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -451,7 +466,7 @@ void adc_clear_stic_flag(uint32_t adc)
  * 0..18.
  */
 
-void adc_set_regular_sequence(uint32_t adc, uint8_t length, uint8_t channel[])
+void adc_set_regular_sequence(uint32_t adc, uint8_t length, const uint8_t channel[])
 {
     ADC_RSQ0(adc) &= ~ADC_RSQ0_RL_MASK;
     ADC_RSQ0(adc) |= ADC_RSQ0_RL_VAL(length) & ADC_RSQ0_RL_MASK;
@@ -459,54 +474,94 @@ void adc_set_regular_sequence(uint32_t adc, uint8_t length, uint8_t channel[])
 	return;
     }
     if (length > 0) {
-	ADC_RSQ2(adc) = channel[0] << ADC_RSQ2_RSQ0_SHIFT;
+	ADC_RSQ2(adc) |= channel[0] << ADC_RSQ2_RSQ0_SHIFT;
     }
     if (length > 1) {
-	ADC_RSQ2(adc) = channel[1] << ADC_RSQ2_RSQ1_SHIFT;
+	ADC_RSQ2(adc) |= channel[1] << ADC_RSQ2_RSQ1_SHIFT;
     }
     if (length > 2) {
-	ADC_RSQ2(adc) = channel[2] << ADC_RSQ2_RSQ2_SHIFT;
+	ADC_RSQ2(adc) |= channel[2] << ADC_RSQ2_RSQ2_SHIFT;
     }
     if (length > 3) {
-	ADC_RSQ2(adc) = channel[3] << ADC_RSQ2_RSQ3_SHIFT;
+	ADC_RSQ2(adc) |= channel[3] << ADC_RSQ2_RSQ3_SHIFT;
     }
     if (length > 4) {
-	ADC_RSQ2(adc) = channel[4] << ADC_RSQ2_RSQ4_SHIFT;
+	ADC_RSQ2(adc) |= channel[4] << ADC_RSQ2_RSQ4_SHIFT;
     }
     if (length > 5) {
-	ADC_RSQ2(adc) = channel[5] << ADC_RSQ2_RSQ5_SHIFT;
+	ADC_RSQ2(adc) |= channel[5] << ADC_RSQ2_RSQ5_SHIFT;
     }
     if (length > 6) {
-	ADC_RSQ1(adc) = channel[6] << ADC_RSQ1_RSQ6_SHIFT;
+	ADC_RSQ1(adc) |= channel[6] << ADC_RSQ1_RSQ6_SHIFT;
     }
     if (length > 7) {
-	ADC_RSQ1(adc) = channel[7] << ADC_RSQ1_RSQ7_SHIFT;
+	ADC_RSQ1(adc) |= channel[7] << ADC_RSQ1_RSQ7_SHIFT;
     }
     if (length > 8) {
-	ADC_RSQ1(adc) = channel[8] << ADC_RSQ1_RSQ8_SHIFT;
+	ADC_RSQ1(adc) |= channel[8] << ADC_RSQ1_RSQ8_SHIFT;
     }
     if (length > 9) {
-	ADC_RSQ1(adc) = channel[9] << ADC_RSQ1_RSQ9_SHIFT;
+	ADC_RSQ1(adc) |= channel[9] << ADC_RSQ1_RSQ9_SHIFT;
     }
     if (length > 10) {
-	ADC_RSQ1(adc) = channel[10] << ADC_RSQ1_RSQ10_SHIFT;
+	ADC_RSQ1(adc) |= channel[10] << ADC_RSQ1_RSQ10_SHIFT;
     }
     if (length > 11) {
-	ADC_RSQ1(adc) = channel[11] << ADC_RSQ1_RSQ11_SHIFT;
+	ADC_RSQ1(adc) |= channel[11] << ADC_RSQ1_RSQ11_SHIFT;
     }
     if (length > 12) {
-	ADC_RSQ0(adc) = channel[12] << ADC_RSQ0_RSQ12_SHIFT;
+	ADC_RSQ0(adc) |= channel[12] << ADC_RSQ0_RSQ12_SHIFT;
     }
     if (length > 13) {
-	ADC_RSQ0(adc) = channel[13] << ADC_RSQ0_RSQ13_SHIFT;
+	ADC_RSQ0(adc) |= channel[13] << ADC_RSQ0_RSQ13_SHIFT;
     }
     if (length > 14) {
-	ADC_RSQ0(adc) = channel[14] << ADC_RSQ0_RSQ14_SHIFT;
+	ADC_RSQ0(adc) |= channel[14] << ADC_RSQ0_RSQ14_SHIFT;
     }
     if (length > 15) {
-	ADC_RSQ0(adc) = channel[15] << ADC_RSQ0_RSQ15_SHIFT;
+	ADC_RSQ0(adc) |= channel[15] << ADC_RSQ0_RSQ15_SHIFT;
     }
+}
 
+/*---------------------------------------------------------------------------*/
+/** @brief ADC Set a Inserted Channel Conversion Sequence
+ *
+ * Define a sequence of channels to be converted as a inserted group with a
+ * length from 1 to 18 channels. If this is called during conversion, the
+ * current conversion is reset and conversion begins again with the newly
+ * defined group.
+ *
+ * @param[in] adc Unsigned int32. ADC base address (@ref adc_reg_base)
+ * @param[in] length Unsigned int8. Number of channels in the group.
+ * @param[in] channel Unsigned int8[]. Set of channels to convert, integers
+ * 0..18.
+ */
+
+void adc_set_inserted_sequence(uint32_t adc, uint8_t length, const uint8_t channel[])
+{
+    ADC_ISQ(adc) &= ~ADC_ISQ_IL_MASK;
+    ADC_ISQ(adc) |= ADC_ISQ_IL_VAL(length - 1) & ADC_ISQ_IL_MASK;
+    if (length == 0) {
+	return;
+    }
+    if (length == 1) {
+	ADC_ISQ(adc) |= channel[0] << ADC_ISQ_ISQ3_SHIFT;
+    }
+    if (length == 2) {
+	ADC_ISQ(adc) |= channel[0] << ADC_ISQ_ISQ2_SHIFT;
+	ADC_ISQ(adc) |= channel[1] << ADC_ISQ_ISQ3_SHIFT;
+    }
+    if (length == 3) {
+	ADC_ISQ(adc) |= channel[0] << ADC_ISQ_ISQ1_SHIFT;
+	ADC_ISQ(adc) |= channel[1] << ADC_ISQ_ISQ2_SHIFT;
+	ADC_ISQ(adc) |= channel[2] << ADC_ISQ_ISQ3_SHIFT;
+    }
+    if (length == 4) {
+	ADC_ISQ(adc) |= channel[0] << ADC_ISQ_ISQ0_SHIFT;
+	ADC_ISQ(adc) |= channel[1] << ADC_ISQ_ISQ1_SHIFT;
+	ADC_ISQ(adc) |= channel[2] << ADC_ISQ_ISQ2_SHIFT;
+	ADC_ISQ(adc) |= channel[3] << ADC_ISQ_ISQ3_SHIFT;
+    }
 }
 
 /*---------------------------------------------------------------------------*/
@@ -565,6 +620,10 @@ void adc_calibrate_start(uint32_t adc)
 {
     ADC_CTL1(adc) |= ADC_CTL1_RSTCLB; /* optional, but so we can call this
 				       * thing repeatedly */
+    while (ADC_CTL1(adc) & ADC_CTL1_RSTCLB) /* wait for end of calibration
+					     * reset */
+	{ }
+
     ADC_CTL1(adc) |= ADC_CTL1_CLB;
 }
 
@@ -577,9 +636,15 @@ void adc_calibrate_start(uint32_t adc)
 
 void adc_calibrate_wait_finish(uint32_t adc)
 {
-    while (ADC_CTL1(adc) & ADC_CTL1_CLB);
+    while (ADC_CTL1(adc) & ADC_CTL1_CLB)
+	{ }
 }
 
+//--------------------------------------------------
+void adc_reset_calibration(uint32_t adc)
+{
+    ADC_CTL1(adc) |= ADC_CTL1_RSTCLB;
+}
 /**@}*/
 
 /*---------------------------------------------------------------------------*/
@@ -635,10 +700,10 @@ void adc_calibrate_wait_finish(uint32_t adc)
  * @param[in] chan Unsigned int8. ADC channel number @ref adc_api_channel
  */
 
-void adc_enable_analog_watchdog_on_selected_channel(uint32_t adc, uint8_t chan)
+void adc_enable_analog_watchdog_on_selected_channel(uint32_t adc, uint8_t channel)
 {
     ADC_CTL0(adc) &= ~ADC_CTL0_WDCHSEL_MASK;
-    ADC_CTL0(adc) |= (ADC_CTL0_WDCHSEL_VAL(chan) & ADC_CTL0_WDCHSEL_MASK);
+    ADC_CTL0(adc) |= (ADC_CTL0_WDCHSEL_VAL(channel) & ADC_CTL0_WDCHSEL_MASK);
     ADC_CTL0(adc) |= ADC_CTL0_RWDEN | ADC_CTL0_IWDEN;
 }
 

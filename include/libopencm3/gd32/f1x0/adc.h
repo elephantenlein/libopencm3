@@ -96,7 +96,7 @@ enum adc_opmode {
 BEGIN_DECLS
 
 /* Operation mode API */
-void adc_enable_regular_discontinuous_mode(uint32_t adc);
+void adc_enable_regular_discontinuous_mode(uint32_t adc, uint8_t length);
 void adc_disable_regular_discontinuous_mode(uint32_t adc);
 void adc_enable_inserted_discontinuous_mode(uint32_t adc);
 void adc_disable_inserted_discontinuous_mode(uint32_t adc);

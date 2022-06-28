@@ -33,7 +33,7 @@ TGT_CFLAGS      += $(DEBUG_FLAGS)
 # ARFLAGS	= rcsv
 ARFLAGS		= rcs
 
-OBJS += adc.o
+OBJS += adc.o adc_common.o
 OBJS += dma_common_f1.o
 OBJS += flash.o flash_common_all.o flash_common_f.o flash_common_f01.o
 OBJS += gpio_common_all.o gpio_common_f0234.o

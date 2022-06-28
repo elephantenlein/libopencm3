@@ -411,15 +411,13 @@
 
 /* --- RCC_CFGR3 values ---------------------------------------------------- */
 
-#define RCC_CFGR3_USART2SW_SHIFT		16
-#define RCC_CFGR3_USART2SW			(3 << RCC_CFGR3_USART2SW_SHIFT)
-#define RCC_CFGR3_USART2SW_PCLK			(0 << RCC_CFGR3_USART2SW_SHIFT)
-#define RCC_CFGR3_USART2SW_SYSCLK		(1 << RCC_CFGR3_USART2SW_SHIFT)
-#define RCC_CFGR3_USART2SW_LSE			(2 << RCC_CFGR3_USART2SW_SHIFT)
-#define RCC_CFGR3_USART2SW_HSI			(3 << RCC_CFGR3_USART2SW_SHIFT)
+#define RCU_CFG2_ADCSEL				(1 << 8)
+#define RCU_CFG2_CECSEL				(1 << 6)
 
-#define RCC_CFGR3_ADCSW				(1 << 8)
-#define RCC_CFGR3_CECSW				(1 << 6)
+#define RCU_CFG2_UART0SEL_APB2			0x0
+#define RCU_CFG2_UART0SEL_SYS			0x1
+#define RCU_CFG2_UART0SEL_LXTAL			0x2
+#define RCU_CFG2_UART0SEL_IRC8M			0x3
 
 /* --- Variable definitions ------------------------------------------------ */
 extern uint32_t rcc_ahb_frequency;
@@ -569,6 +567,10 @@ void rcc_set_pllxtpre(uint32_t pllxtpre);
 uint32_t rcc_rtc_clock_enabled_flag(void);
 void rcc_enable_rtc_clock(void);
 void rcc_set_rtc_clock_source(enum rcc_osc clock_source);
+void rcc_set_adc_clock_source_irc14m(void);
+void rcc_set_adc_clock_source_apb2(void);
+void rcc_set_cec_clock_source_irc8m_div_244(void);
+void rcc_set_cec_clock_source_lxtal(void);
 void rcc_set_adcpre(uint32_t adcpre);
 void rcc_set_ppre2(uint32_t ppre1);
 void rcc_set_ppre1(uint32_t ppre1);

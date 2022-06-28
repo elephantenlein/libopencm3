@@ -477,6 +477,27 @@ void rcc_set_rtc_clock_source(enum rcc_osc clock_source)
 }
 
 /*---------------------------------------------------------------------------*/
+void rcc_set_adc_clock_source_irc14m(void)
+{
+    RCC_CFGR3 &= ~RCU_CFG2_ADCSEL;
+}
+
+void rcc_set_adc_clock_source_apb2(void)
+{
+    RCC_CFGR3 |= RCU_CFG2_ADCSEL;
+}
+
+void rcc_set_cec_clock_source_irc8m_div_244(void)
+{
+    RCC_CFGR3 &= ~RCU_CFG2_CECSEL;
+}
+
+void rcc_set_cec_clock_source_lxtal(void)
+{
+    RCC_CFGR3 |= RCU_CFG2_CECSEL;
+}
+
+/*---------------------------------------------------------------------------*/
 /** @brief ADC Setup the A/D Clock
 
 The ADC's have a common clock prescale setting.
@@ -601,6 +622,7 @@ void rcc_clock_setup_pll(const struct rcc_clock_scale *clock)
 	rcc_set_ppre2(clock->ppre2);
 
 	rcc_set_adcpre(clock->adcpre);
+	rcc_set_adc_clock_source_apb2();
 	if (clock->use_hse)
 		rcc_set_usbpre(clock->usbpre);
 
