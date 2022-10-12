@@ -190,7 +190,7 @@ group.
 /* --- DMA_INTC values ----------------------------------------------------- */
 
 /* ERRIFC: Transfer error clear */
-#define DMA_INTC_ERRIFC_BIT		DMA_TEIF
+#define DMA_INTC_ERRIFC_BIT		DMA_ERRIF
 #define DMA_INTC_ERRIFC(channel)		(DMA_INTC_ERRIFC_BIT << \
 					 (DMA_FLAG_OFFSET(channel)))
 
@@ -203,7 +203,7 @@ group.
 #define DMA_INTC_ERRIFC7		DMA_INTC_ERRIFC(DMA_CHANNEL7)
 
 /* HTFIFC: Half transfer clear */
-#define DMA_INTC_HTFIFC_BIT		DMA_HTIF
+#define DMA_INTC_HTFIFC_BIT		DMA_HTFIF
 #define DMA_INTC_HTFIFC(channel)		(DMA_INTC_HTFIFC_BIT << \
 					 (DMA_FLAG_OFFSET(channel)))
 
@@ -216,7 +216,7 @@ group.
 #define DMA_INTC_HTFIFC7		DMA_INTC_HTFIFC(DMA_CHANNEL7)
 
 /* FTFIFC: Transfer complete clear */
-#define DMA_INTC_FTFIFC_BIT		DMA_TCIF
+#define DMA_INTC_FTFIFC_BIT		DMA_FTFIF
 #define DMA_INTC_FTFIFC(channel)		(DMA_INTC_FTFIFC_BIT << \
 					 (DMA_FLAG_OFFSET(channel)))
 

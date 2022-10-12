@@ -618,7 +618,7 @@ void adc_disable_vbat_sensor(uint32_t adc)
 
 void adc_calibrate_start(uint32_t adc)
 {
-    ADC_CTL1(adc) |= ADC_CTL1_RSTCLB; /* optional, but so we can call this
+    adc_reset_calbiration(adc); /* optional, but so we can call this
 				       * thing repeatedly */
     while (ADC_CTL1(adc) & ADC_CTL1_RSTCLB) /* wait for end of calibration
 					     * reset */
@@ -644,6 +644,13 @@ void adc_calibrate_wait_finish(uint32_t adc)
 void adc_reset_calibration(uint32_t adc)
 {
     ADC_CTL1(adc) |= ADC_CTL1_RSTCLB;
+}
+
+//--------------------------------------------------
+void adc_calibrate(uint32_t adc)
+{
+adc_calibrate_start(adc);
+adc_calibrate_wait_finish(adc);
 }
 /**@}*/
 

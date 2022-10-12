@@ -129,6 +129,7 @@ void usart_disable_parity_interrupt(uint32_t usart);
 void usart_enable_error_interrupt(uint32_t usart);
 void usart_disable_error_interrupt(uint32_t usart);
 bool usart_get_flag(uint32_t usart, uint32_t flag);
+void usart_clear_flag(uint32_t usart, uint32_t flag);
 
 END_DECLS
 

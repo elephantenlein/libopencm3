@@ -298,8 +298,14 @@ void usart_wait_recv_ready(uint32_t usart)
 
 bool usart_get_flag(uint32_t usart, uint32_t flag)
 {
-	return ((USART_STAT(usart) & flag) != 0);
+    return ((USART_STAT(usart) & flag) != 0);
 }
+
+void usart_clear_flag(uint32_t usart, uint32_t flag)
+{
+    USART_INTC(usart) |= flag;
+}
+
 
 
 /**@}*/
